@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:csv/csv.dart';
 
-/// Represents a vehicle path point with geospatial and temporal data
+/// Represents a vehicle path point with geospatial and temporal data.
 class VehiclePoint {
   final double latitude;
   final double longitude;
+  // Note: The key in the JSON is "timeStamp" (with a capital S).
   final String timestamp;
   final double speed;
   final double heading;
@@ -19,10 +19,10 @@ class VehiclePoint {
   });
 }
 
-/// Represents a store location with unique identifier
+/// Represents a store location with a unique identifier.
 class Store {
-  final String id; // Unique store identifier
-  final String name; // Store display name
+  final String id; // Unique store identifier.
+  final String name; // Store display name.
   final double latitude;
   final double longitude;
 
@@ -34,19 +34,22 @@ class Store {
   });
 }
 
-/// Parses vehicle path data from JSON asset
+/// Parses vehicle path data from a JSON asset.
 Future<List<VehiclePoint>> parseVehiclePath() async {
   try {
+    // Load the JSON file as a string.
     final String response =
         await rootBundle.loadString('assets/PathTravelled.json');
-    if (response.isEmpty) throw Exception("Empty JSON file");
+    if (response.isEmpty) throw Exception("Empty JSON file for vehicle path");
 
     final List<dynamic> data = json.decode(response);
+    // Map each JSON object to a VehiclePoint.
     return data
         .map((point) => VehiclePoint(
               latitude: point['latitude']?.toDouble() ?? 0.0,
               longitude: point['longitude']?.toDouble() ?? 0.0,
-              timestamp: point['timestamp']?.toString() ?? "Unknown",
+              // Use the correct key "timeStamp" here.
+              timestamp: point['timeStamp']?.toString() ?? "0",
               speed: point['speed']?.toDouble() ?? 0.0,
               heading: point['heading']?.toDouble() ?? 0.0,
             ))
@@ -57,18 +60,20 @@ Future<List<VehiclePoint>> parseVehiclePath() async {
   }
 }
 
-/// Parses store data from JSON asset
+/// Parses store data from a JSON asset.
 Future<List<Store>> parseStores() async {
   try {
     final String response =
         await rootBundle.loadString('assets/storesCopy.json');
-    if (response.isEmpty) throw Exception("Empty store JSON file");
+    if (response.isEmpty) throw Exception("Empty JSON file for stores");
 
     final List<dynamic> data = json.decode(response);
+    // Map each JSON object to a Store.
     return data
         .map((store) => Store(
-              id: store['store'], // Unique identifier from JSON
-              name: store['store'], // Display name
+              // Assuming the JSON key 'store' holds both ID and name.
+              id: store['store'],
+              name: store['store'],
               latitude: (store['latitude'] as num).toDouble(),
               longitude: (store['longitude'] as num).toDouble(),
             ))
