@@ -1,3 +1,7 @@
+
+
+
+
 # Vehicle Path Visualization
 
 This Flutter application visualizes a vehicle's journey on a Google Map. It displays the vehicle path using a polyline, places markers for each vehicle point (showing detailed metrics such as timestamp, speed, and heading), and plots store locations—highlighting the closest store to the vehicle's path. Key trip metrics like total distance traveled, the highest speed recorded, and the time the vehicle first came near the closest store are shown in the UI.
@@ -48,3 +52,6 @@ This Flutter application visualizes a vehicle's journey on a Google Map. It disp
     "heading": 0,
     "speed": 0
   }
+
+
+loom video explaining url : []
