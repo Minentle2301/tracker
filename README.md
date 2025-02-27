@@ -54,4 +54,4 @@ This Flutter application visualizes a vehicle's journey on a Google Map. It disp
   }
 
 
-loom video explaining url : []
+loom video explaining url : [https://www.loom.com/share/ef98275fa4794627a09b064724d67bf1?sid=13bdf7b7-13db-40b3-8ce7-bb679a862bd7]
